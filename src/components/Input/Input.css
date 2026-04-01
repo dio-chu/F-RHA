@@ -1,0 +1,39 @@
+.f-rha-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.f-rha-input-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+}
+
+.f-rha-input {
+  padding: 10px 14px;
+  border: 1.5px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.f-rha-input:focus {
+  border-color: #4f46e5;
+}
+
+.f-rha-input:disabled {
+  background-color: #f3f4f6;
+  cursor: not-allowed;
+}
+
+.f-rha-input--error {
+  border-color: #ef4444;
+}
+
+.f-rha-input-error-msg {
+  font-size: 12px;
+  color: #ef4444;
+}

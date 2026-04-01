@@ -1,0 +1,75 @@
+.f-rha-radio-group {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.f-rha-radio-legend {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.f-rha-radio-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.f-rha-radio-item--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.f-rha-radio-input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.f-rha-radio-custom {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.f-rha-radio-custom::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #4f46e5;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.f-rha-radio-input:checked + .f-rha-radio-custom {
+  border-color: #4f46e5;
+}
+
+.f-rha-radio-input:checked + .f-rha-radio-custom::after {
+  opacity: 1;
+}
+
+.f-rha-radio-item:hover:not(.f-rha-radio-item--disabled) .f-rha-radio-custom {
+  border-color: #6366f1;
+}
+
+.f-rha-radio-label {
+  font-size: 15px;
+  color: #374151;
+}

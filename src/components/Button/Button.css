@@ -1,0 +1,56 @@
+.f-rha-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  transition: opacity 0.2s, background-color 0.2s;
+}
+
+.f-rha-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Variants */
+.f-rha-btn--primary {
+  background-color: #4f46e5;
+  color: #ffffff;
+}
+.f-rha-btn--primary:hover:not(:disabled) {
+  background-color: #4338ca;
+}
+
+.f-rha-btn--secondary {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+.f-rha-btn--secondary:hover:not(:disabled) {
+  background-color: #d1d5db;
+}
+
+.f-rha-btn--outline {
+  background-color: transparent;
+  color: #4f46e5;
+  border: 1.5px solid #4f46e5;
+}
+.f-rha-btn--outline:hover:not(:disabled) {
+  background-color: #f5f3ff;
+}
+
+/* Sizes */
+.f-rha-btn--sm {
+  padding: 6px 12px;
+  font-size: 13px;
+}
+.f-rha-btn--md {
+  padding: 10px 20px;
+  font-size: 15px;
+}
+.f-rha-btn--lg {
+  padding: 14px 28px;
+  font-size: 17px;
+}
