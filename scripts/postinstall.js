@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, existsSync } from "fs";
+import { copyFileSync, mkdirSync, readdirSync } from "fs";
 import { join, resolve } from "path";
 import { fileURLToPath } from "url";
 
@@ -9,13 +9,14 @@ if (!projectRoot || resolve(projectRoot) === resolve(packageRoot)) {
   process.exit(0);
 }
 
-const components = ["button", "input", "dialog", "radio"];
+const skillsDir = join(packageRoot, ".claude", "skills");
+const components = readdirSync(skillsDir, { withFileTypes: true })
+  .filter((d) => d.isDirectory())
+  .map((d) => d.name);
 
 let copied = 0;
 for (const component of components) {
-  const src = join(packageRoot, ".claude", "skills", component, "SKILL.md");
-  if (!existsSync(src)) continue;
-
+  const src = join(skillsDir, component, "SKILL.md");
   const targetDir = join(projectRoot, ".claude", "skills", `f-rha-${component}`);
   mkdirSync(targetDir, { recursive: true });
   copyFileSync(src, join(targetDir, "SKILL.md"));
