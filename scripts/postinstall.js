@@ -148,10 +148,11 @@ if (hasChanges) {
   writeFileSync(changelogFile, lines.join("\n") + "\n", "utf-8");
 }
 
-// 清理 node_modules 中的 skill 檔案
+// 清理 node_modules 中的 .claude 資料夾
 try {
-  if (existsSync(skillsDir)) {
-    rmSync(skillsDir, { recursive: true, force: true });
+  const claudeDir = join(packageRoot, ".claude");
+  if (existsSync(claudeDir)) {
+    rmSync(claudeDir, { recursive: true, force: true });
   }
 } catch {
   // 刪除失敗不影響使用

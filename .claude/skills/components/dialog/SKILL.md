@@ -9,14 +9,15 @@ A modal dialog component. Closes on overlay click or Escape key.
 
 ## Props
 
-| Prop       | Type          | Default   | Description                                                          |
-|------------|---------------|-----------|----------------------------------------------------------------------|
-| `open`     | `boolean`     | `false`   | Controls dialog visibility                                           |
-| `onClose`  | `() => void`  | —         | Called when overlay or close button is clicked, or Escape is pressed |
-| `title`    | `string`      | —         | Dialog header title                                                  |
-| `children` | `ReactNode`   | —         | Dialog body content                                                  |
-| `footer`   | `ReactNode`   | —         | Dialog footer content (e.g. action buttons)                          |
-| `width`    | `string`      | `"480px"` | Dialog width (any valid CSS value)                                   |
+| Prop             | Type         | Default   | Description                                               |
+| ---------------- | ------------ | --------- | --------------------------------------------------------- |
+| `open`           | `boolean`    | `false`   | Controls dialog visibility                                |
+| `onClose`        | `() => void` | —         | Called when close button is clicked, or Escape is pressed |
+| `title`          | `string`     | —         | Dialog header title                                       |
+| `children`       | `ReactNode`  | —         | Dialog body content                                       |
+| `footer`         | `ReactNode`  | —         | Dialog footer content (e.g. action buttons)               |
+| `width`          | `string`     | `"480px"` | Dialog width (any valid CSS value)                        |
+| `closeOnOverlay` | `boolean`    | `true`    | Whether clicking overlay closes the dialog                |
 
 ## Usage
 
@@ -44,7 +45,12 @@ const [open, setOpen] = useState(false);
 
 ## Changelog
 
+### 1.1.0
+
+- Added `closeOnOverlay` prop to control whether overlay click closes the dialog
+
 ### 1.0.0
+
 - Initial release
 - Overlay click and Escape key to close
 - Configurable width, title, footer

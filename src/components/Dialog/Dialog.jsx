@@ -8,6 +8,7 @@ const Dialog = ({
   children,
   footer,
   width = "480px",
+  closeOnOverlay = true,
   ...props
 }) => {
   useEffect(() => {
@@ -21,7 +22,10 @@ const Dialog = ({
   if (!open) return null;
 
   return (
-    <div className="f-rha-dialog-overlay" onClick={onClose}>
+    <div
+      className="f-rha-dialog-overlay"
+      onClick={closeOnOverlay ? onClose : undefined}
+    >
       <div
         className="f-rha-dialog"
         style={{ width }}
@@ -30,7 +34,11 @@ const Dialog = ({
       >
         <div className="f-rha-dialog-header">
           {title && <h3 className="f-rha-dialog-title">{title}</h3>}
-          <button className="f-rha-dialog-close" onClick={onClose} aria-label="Close">
+          <button
+            className="f-rha-dialog-close"
+            onClick={onClose}
+            aria-label="Close"
+          >
             ×
           </button>
         </div>
