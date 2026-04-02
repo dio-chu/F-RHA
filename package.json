@@ -1,8 +1,8 @@
 {
   "name": "f-rha",
-  "version": "1.1.6",
+  "version": "1.1.8",
   "type": "module",
-  "description": "A React component library",
+  "description": "Testing Claude MarketPlace1",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "files": [
