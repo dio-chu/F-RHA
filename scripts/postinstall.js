@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, readdirSync } from "fs";
+import { copyFileSync, mkdirSync, readdirSync, rmSync } from "fs";
 import { join, resolve } from "path";
 import { fileURLToPath } from "url";
 
@@ -34,4 +34,12 @@ for (const category of categories) {
 
 if (copied > 0) {
   console.log(`[f-rha] ✓ Copied ${copied} skills → .claude/skills/f-rha-{name}/`);
+  
+  // 删除 node_modules 中的 skill 文件以节省空间
+  try {
+    rmSync(skillsDir, { recursive: true, force: true });
+    console.log(`[f-rha] ✓ Cleaned up skills from node_modules to save space`);
+  } catch (err) {
+    // 删除失败不影响使用，静默处理
+  }
 }
