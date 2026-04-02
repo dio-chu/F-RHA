@@ -125,9 +125,17 @@ if (hasChanges) {
   console.log();
 }
 
-// 清理 node_modules 中的 skill 檔案
+// 清理 node_modules 中的 skill 檔案（總是執行，即使沒有變更）
 try {
-  rmSync(skillsDir, { recursive: true, force: true });
-} catch {
-  // 刪除失敗不影響使用
+  if (existsSync(skillsDir)) {
+    rmSync(skillsDir, { recursive: true, force: true });
+    if (hasChanges) {
+      console.log(`  💾 Cleaned up node_modules/.claude/skills`);
+    }
+  }
+} catch (err) {
+  // 刪除失敗不影響使用，但可能需要手動清理
+  console.warn(
+    `  ⚠️  Could not clean up node_modules/.claude/skills: ${err.message}`,
+  );
 }

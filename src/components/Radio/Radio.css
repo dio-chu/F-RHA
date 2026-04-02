@@ -7,6 +7,16 @@
   gap: 10px;
 }
 
+.f-rha-radio-group--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.f-rha-radio-group--vertical {
+  flex-direction: column;
+}
+
 .f-rha-radio-legend {
   font-size: 14px;
   font-weight: 500;

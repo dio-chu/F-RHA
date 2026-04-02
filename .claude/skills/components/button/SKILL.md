@@ -1,21 +1,22 @@
 ---
 name: f-rha-button
-description: Use when the user wants to use, customize, or ask about the Button component from the f-rha library. Covers variants (primary, secondary, outline), sizes (sm, md, lg), disabled state, and click handling 測試檔案是否直接覆蓋.
+description: Use when the user wants to use, customize, or ask about the Button component from the f-rha library. Covers variants (primary, secondary, outline), sizes (sm, md, lg), fullWidth mode, disabled state, and click handling.
 ---
 
 # Button — f-rha
 
-A clickable button component.
+A clickable button component with multiple styles and sizes.
 
 ## Props
 
-| Prop       | Type                                    | Default     | Description            |
-| ---------- | --------------------------------------- | ----------- | ---------------------- |
-| `children` | `ReactNode`                             | —           | Button label / content |
-| `variant`  | `"primary" \| "secondary" \| "outline"` | `"primary"` | Visual style           |
-| `size`     | `"sm" \| "md" \| "lg"`                  | `"md"`      | Button size            |
-| `disabled` | `boolean`                               | `false`     | Disables the button    |
-| `onClick`  | `() => void`                            | —           | Click handler          |
+| Prop        | Type                                    | Default     | Description                  |
+| ----------- | --------------------------------------- | ----------- | ---------------------------- |
+| `children`  | `ReactNode`                             | —           | Button label / content       |
+| `variant`   | `"primary" \| "secondary" \| "outline"` | `"primary"` | Visual style                 |
+| `size`      | `"sm" \| "md" \| "lg"`                  | `"md"`      | Button size                  |
+| `fullWidth` | `boolean`                               | `false`     | Expands button to full width |
+| `disabled`  | `boolean`                               | `false`     | Disables the button          |
+| `onClick`   | `() => void`                            | —           | Click handler                |
 
 ## Usage
 
@@ -29,9 +30,17 @@ import { Button } from "f-rha";
 <Button variant="outline" disabled>
   Cancel
 </Button>
+
+<Button fullWidth variant="primary">
+  Full Width Button
+</Button>
 ```
 
 ## Changelog
+
+### 1.1.0
+
+- Added `fullWidth` prop for 100% width buttons
 
 ### 1.0.0
 

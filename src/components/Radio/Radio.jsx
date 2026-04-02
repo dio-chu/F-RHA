@@ -7,15 +7,20 @@ const Radio = ({
   name,
   disabled = false,
   label,
+  layout = "vertical",
   ...props
 }) => {
   return (
-    <fieldset className="f-rha-radio-group" {...props}>
+    <fieldset
+      className={`f-rha-radio-group f-rha-radio-group--${layout}`}
+      {...props}
+    >
       {label && <legend className="f-rha-radio-legend">{label}</legend>}
       {options.map((option) => {
         const optionValue = typeof option === "object" ? option.value : option;
         const optionLabel = typeof option === "object" ? option.label : option;
-        const isDisabled = disabled || (typeof option === "object" && option.disabled);
+        const isDisabled =
+          disabled || (typeof option === "object" && option.disabled);
         const id = `${name}-${optionValue}`;
 
         return (
