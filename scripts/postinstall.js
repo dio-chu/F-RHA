@@ -5,6 +5,7 @@ import {
   readFileSync,
   readdirSync,
   rmSync,
+  writeFileSync,
 } from "fs";
 import { join, resolve } from "path";
 import { fileURLToPath } from "url";
@@ -24,6 +25,13 @@ if (!existsSync(skillsDir)) {
 
 const PREFIX = "f-rha-";
 const targetBaseDir = join(projectRoot, ".claude", "skills");
+const changelogFile = join(targetBaseDir, "f-rha-changelog.md");
+
+// 讀取套件版本
+const pkg = JSON.parse(
+  readFileSync(join(packageRoot, "package.json"), "utf-8"),
+);
+const pkgVersion = pkg.version;
 
 // 收集本版本所有 skill 名稱
 const newSkillNames = new Set();
@@ -51,7 +59,6 @@ const existingSkillDirs = existsSync(targetBaseDir)
 const added = [];
 const updated = [];
 const removed = [];
-const unchanged = [];
 
 // 複製新版 skill，判斷 新增 / 更新 / 未變動
 for (const category of categories) {
@@ -71,7 +78,6 @@ for (const category of categories) {
     if (isExisting) {
       const oldContent = readFileSync(targetFile, "utf-8");
       if (oldContent === newContent) {
-        unchanged.push(skill);
         continue;
       }
       updated.push(skill);
@@ -95,47 +101,58 @@ for (const existing of existingSkillDirs) {
   }
 }
 
-// 輸出結果
+// 寫入 changelog 檔案
 const hasChanges = added.length || updated.length || removed.length;
 
 if (hasChanges) {
-  console.log();
-  console.log("  ┌──────────────────────────────────────┐");
-  console.log("  │        f-rha · skills sync            │");
-  console.log("  └──────────────────────────────────────┘");
-  console.log();
+  const timestamp = new Date().toISOString().replace("T", " ").slice(0, 19);
+  const lines = [`# f-rha skills changelog`, ``];
+
+  // 讀取既有 changelog 歷史（跳過標題）
+  let history = "";
+  if (existsSync(changelogFile)) {
+    const old = readFileSync(changelogFile, "utf-8");
+    const idx = old.indexOf("\n## ");
+    if (idx !== -1) {
+      history = old.slice(idx);
+    }
+  }
+
+  lines.push(`## v${pkgVersion} — ${timestamp}`);
+  lines.push(``);
 
   for (const name of added) {
-    console.log(`    + ${name}`);
+    lines.push(`- + \`${name}\` — added`);
   }
   for (const name of updated) {
-    console.log(`    ↑ ${name}`);
+    lines.push(`- ↑ \`${name}\` — updated`);
   }
   for (const name of removed) {
-    console.log(`    - ${name}`);
+    lines.push(`- ✕ \`${name}\` — removed`);
   }
 
-  console.log();
-  const parts = [
+  lines.push(``);
+  const summary = [
     added.length && `${added.length} added`,
     updated.length && `${updated.length} updated`,
     removed.length && `${removed.length} removed`,
-  ].filter(Boolean);
-  console.log(`  ${parts.join(", ")}`);
-  console.log();
+  ]
+    .filter(Boolean)
+    .join(", ");
+  lines.push(`> ${summary}`);
+
+  if (history) {
+    lines.push(history);
+  }
+
+  writeFileSync(changelogFile, lines.join("\n") + "\n", "utf-8");
 }
 
-// 清理 node_modules 中的 skill 檔案（總是執行，即使沒有變更）
+// 清理 node_modules 中的 skill 檔案
 try {
   if (existsSync(skillsDir)) {
     rmSync(skillsDir, { recursive: true, force: true });
-    if (hasChanges) {
-      console.log(`  💾 Cleaned up node_modules/.claude/skills`);
-    }
   }
-} catch (err) {
-  // 刪除失敗不影響使用，但可能需要手動清理
-  console.warn(
-    `  ⚠️  Could not clean up node_modules/.claude/skills: ${err.message}`,
-  );
+} catch {
+  // 刪除失敗不影響使用
 }

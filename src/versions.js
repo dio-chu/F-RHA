@@ -3,5 +3,5 @@ export const versions = {
   Input: "1.0.0",
   Dialog: "1.0.0",
   Radio: "1.1.0",
-  Link: "1.0.0",
+  Select: "1.0.0",
 };
