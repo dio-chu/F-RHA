@@ -1,0 +1,47 @@
+.f-rha-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.f-rha-tooltip {
+  position: absolute;
+  background-color: #1f2937;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 100;
+}
+
+.f-rha-tooltip-wrapper:hover .f-rha-tooltip {
+  opacity: 1;
+}
+
+/* Placements */
+.f-rha-tooltip--top {
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.f-rha-tooltip--bottom {
+  top: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.f-rha-tooltip--left {
+  right: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.f-rha-tooltip--right {
+  left: calc(100% + 6px);
+  top: 50%;
+  transform: translateY(-50%);
+}

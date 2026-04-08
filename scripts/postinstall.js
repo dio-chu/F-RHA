@@ -152,9 +152,12 @@ if (hasChanges) {
 const MARKETPLACE_ID = "f-rha-marketplace";
 const MARKETPLACE_PLUGINS = [
   "f-rha-button",
+  "f-rha-card",
   "f-rha-dialog",
   "f-rha-input",
   "f-rha-radio",
+  "f-rha-select",
+  "f-rha-tooltip",
   "f-rha-use-debounce",
   "f-rha-use-local-storage",
 ];
@@ -176,11 +179,20 @@ settings.extraKnownMarketplaces[MARKETPLACE_ID] = {
   source: {
     source: "github",
     repo: "dio-chu/f-rha-marketplace",
-    ref: pkgVersion,
+    ref: `v${pkgVersion}`,
   },
 };
 
 if (!settings.enabledPlugins) settings.enabledPlugins = {};
+
+// 移除屬於此 marketplace 但本版本已不存在的舊 plugins
+const validKeys = new Set(MARKETPLACE_PLUGINS.map((p) => `${p}@${MARKETPLACE_ID}`));
+for (const key of Object.keys(settings.enabledPlugins)) {
+  if (key.endsWith(`@${MARKETPLACE_ID}`) && !validKeys.has(key)) {
+    delete settings.enabledPlugins[key];
+  }
+}
+
 for (const plugin of MARKETPLACE_PLUGINS) {
   settings.enabledPlugins[`${plugin}@${MARKETPLACE_ID}`] = true;
 }
