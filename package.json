@@ -1,6 +1,6 @@
 {
   "name": "f-rha",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "type": "module",
   "description": "Testing Claude MarketPlace1",
   "main": "dist/index.cjs.js",
@@ -14,6 +14,7 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "lint": "eslint src --ext .js,.jsx",
+    "prepublishOnly": "npm run build",
     "postinstall": "node scripts/postinstall.js"
   },
   "keywords": [
