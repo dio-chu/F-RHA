@@ -152,7 +152,6 @@ if (hasChanges) {
 const MARKETPLACE_ID = "f-rha-marketplace";
 const MARKETPLACE_PLUGINS = [
   "f-rha-button",
-  "f-rha-card",
   "f-rha-dialog",
   "f-rha-input",
   "f-rha-radio",
@@ -186,7 +185,9 @@ settings.extraKnownMarketplaces[MARKETPLACE_ID] = {
 if (!settings.enabledPlugins) settings.enabledPlugins = {};
 
 // 移除屬於此 marketplace 但本版本已不存在的舊 plugins
-const validKeys = new Set(MARKETPLACE_PLUGINS.map((p) => `${p}@${MARKETPLACE_ID}`));
+const validKeys = new Set(
+  MARKETPLACE_PLUGINS.map((p) => `${p}@${MARKETPLACE_ID}`),
+);
 for (const key of Object.keys(settings.enabledPlugins)) {
   if (key.endsWith(`@${MARKETPLACE_ID}`) && !validKeys.has(key)) {
     delete settings.enabledPlugins[key];
