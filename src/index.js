@@ -4,6 +4,7 @@ export { default as Dialog } from "./components/Dialog";
 export { default as Radio } from "./components/Radio";
 export { default as Select } from "./components/Select";
 export { default as Tooltip } from "./components/Tooltip";
+export { default as Card } from "./components/Card";
 
 export { useLocalStorage, useDebounce } from "./hooks";
 

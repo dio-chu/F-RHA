@@ -24,6 +24,7 @@ const MARKETPLACE_PLUGINS = [
   "f-rha-radio",
   "f-rha-select",
   "f-rha-tooltip",
+  "f-rha-card",
   "f-rha-use-debounce",
   "f-rha-use-local-storage",
 ];
